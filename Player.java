@@ -1,10 +1,14 @@
+import java.util.ArrayList;
+
 public class Player {
     String name;
     int score;
+    ArrayList<Card> cards;
     
     public Player(String name){
         this.name = name;
         this.score = 0;
+        cards = new ArrayList<>();
     }
 
     public int getScore(){
@@ -15,7 +19,12 @@ public class Player {
         return this.name;
     }
 
-    public void setScore(int score){
-        this.score = score;
+    public void addCard(Card card){
+        cards.add(card);
+        this.score+=card.getNum();
+    }
+
+    public void noCards(){
+        cards.clear();
     }
 }

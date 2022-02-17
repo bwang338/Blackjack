@@ -5,7 +5,7 @@ public class Table {
     Player p1;
     Player dealer;
     ArrayList<Card> deck = new ArrayList<>();
-    String[] suits = new String[]{"Spades, Diamonds, Hearts, Clubs"};
+    String[] suits = new String[]{"Spades", "Diamonds", "Hearts", "Clubs"};
     Random rand = new Random();
     
     public Table(String p1){
@@ -18,22 +18,33 @@ public class Table {
             }
         }
     }
+    
+    //helper method
+    private void displayCards(Player p){
+        for (int i = 0; i < p.cards.size(); i++){
+            System.out.println(p.cards.get(i));
+        }
+    }
 
-    public void drawCard(Player p){
+    //helper method
+    private void drawCard(Player p){
         int cardIndex = rand.nextInt(deck.size());
         Card card = deck.get(cardIndex);
         if (card.getNum() < 11){
-            p.setScore(p.getScore()+card.getNum());
-        }
-        else{
-            p.setScore(p.getScore() + 10);
+            p.addCard(card);
         }
         deck.remove(cardIndex);
     }
 
-    public void runGame(){
+    //helper method
+    private void runGame(){
         while(p1.getScore() <= 21 && dealer.getScore() <= 21){
-
+            System.out.println("Your cards:");
+            displayCards(p1);
+            System.out.println("Dealer's card");
+            displayCards(dealer);
+            drawCard(p1);
+            drawCard(dealer);
         }
     }
 
@@ -46,9 +57,13 @@ public class Table {
                 drawCard(dealer);
             }
         }
+        runGame();
     }
+
+    //used to test
     public static void main(String[] args){
         Table table = new Table("Brian");
+        table.startGame();
     }
     
 }
