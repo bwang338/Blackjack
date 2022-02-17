@@ -10,7 +10,7 @@ public class Card {
         this.suit = suit;
         this.royal = "";
         if (number > 10){
-            this.number = number;
+            this.number = 10;
             faceCard = true;
             this.royal = royalFaces[number - 11];
         }

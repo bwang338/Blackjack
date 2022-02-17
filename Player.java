@@ -21,10 +21,16 @@ public class Player {
 
     public void addCard(Card card){
         cards.add(card);
-        this.score+=card.getNum();
+        this.score += card.getNum();
     }
 
     public void noCards(){
         cards.clear();
+    }
+
+    public void displayCards(){
+        for (int i = 0; i < this.cards.size(); i++){
+            System.out.println(this.cards.get(i));
+        }
     }
 }

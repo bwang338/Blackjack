@@ -18,34 +18,23 @@ public class Table {
             }
         }
     }
-    
-    //helper method
-    private void displayCards(Player p){
-        for (int i = 0; i < p.cards.size(); i++){
-            System.out.println(p.cards.get(i));
-        }
-    }
 
     //helper method
     private void drawCard(Player p){
         int cardIndex = rand.nextInt(deck.size());
         Card card = deck.get(cardIndex);
-        if (card.getNum() < 11){
-            p.addCard(card);
-        }
+        p.addCard(card);
         deck.remove(cardIndex);
     }
 
     //helper method
     private void runGame(){
-        while(p1.getScore() <= 21 && dealer.getScore() <= 21){
-            System.out.println("Your cards:");
-            displayCards(p1);
-            System.out.println("Dealer's card");
-            displayCards(dealer);
-            drawCard(p1);
-            drawCard(dealer);
-        }
+        System.out.println("Your Cards: \n");
+        p1.displayCards();
+        System.out.println("your score: " + p1.getScore());
+        System.out.println("\n Dealer Cards:\n");
+        dealer.displayCards();
+        System.out.println("dealer score: " + dealer.getScore());
     }
 
     public void startGame(){
@@ -64,6 +53,5 @@ public class Table {
     public static void main(String[] args){
         Table table = new Table("Brian");
         table.startGame();
-    }
-    
+    }    
 }
