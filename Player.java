@@ -29,8 +29,10 @@ public class Player {
     }
 
     public void displayCards(){
+        System.out.println(name + " has:\n");
         for (int i = 0; i < this.cards.size(); i++){
             System.out.println(this.cards.get(i));
         }
+        System.out.println(name + "'s score is " + this.score + "\n");
     }
 }

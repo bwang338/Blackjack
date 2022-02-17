@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Table {
     Player p1;
@@ -7,6 +8,7 @@ public class Table {
     ArrayList<Card> deck = new ArrayList<>();
     String[] suits = new String[]{"Spades", "Diamonds", "Hearts", "Clubs"};
     Random rand = new Random();
+    
     
     public Table(String p1){
         this.p1 = new Player(p1);
@@ -27,16 +29,6 @@ public class Table {
         deck.remove(cardIndex);
     }
 
-    //helper method
-    private void runGame(){
-        System.out.println("Your Cards: \n");
-        p1.displayCards();
-        System.out.println("your score: " + p1.getScore());
-        System.out.println("\n Dealer Cards:\n");
-        dealer.displayCards();
-        System.out.println("dealer score: " + dealer.getScore());
-    }
-
     public void startGame(){
         for (int i = 0; i < 3; i++){
             if (i % 2 == 0){
@@ -46,12 +38,46 @@ public class Table {
                 drawCard(dealer);
             }
         }
-        runGame();
+        p1.displayCards();
+        dealer.displayCards();
+    }
+
+    public void play(Player p){
+        System.out.println("what would " + p.getName() + " like to do? (hit/stay)");
+        Scanner scan = new Scanner(System.in);
+        String move = scan.next();
+        while(p.getScore() < 21 && !move.equals("stay")){
+            while (!move.equals("hit") || !move.equals("stay")){
+                System.out.println("must input either hit or stay");
+                move = scan.next();
+            }
+            if (move.equals("stay")){
+                break;
+            }
+            drawCard(p);
+            p.displayCards();
+        }
+
+        scan.close();
+    }
+
+    public void checkWin(Player p1, Player p2){
+        if (p1.getScore() > p2.getScore()){
+            System.out.println(p1 + "wins!");
+        }
+        else System.out.println(p2 + "wins!");
     }
 
     //used to test
     public static void main(String[] args){
-        Table table = new Table("Brian");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Input player name:");
+        String name = scan.nextLine();
+        Table table = new Table(name);
         table.startGame();
+        table.play(table.p1);
+        table.play(table.dealer);
+        table.checkWin(table.p1, table.dealer);
+        scan.close();
     }    
 }
