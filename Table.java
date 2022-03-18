@@ -30,14 +30,9 @@ public class Table {
     }
 
     public void startGame(){
-        for (int i = 0; i < 3; i++){
-            if (i % 2 == 0){
-                drawCard(p1);
-            }
-            else{
-                drawCard(dealer);
-            }
-        }
+        drawCard(p1);
+        drawCard(dealer);
+        drawCard(p1);
         p1.displayCards();
         dealer.displayCards();
     }
