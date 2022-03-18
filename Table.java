@@ -42,7 +42,7 @@ public class Table {
         Scanner scan = new Scanner(System.in);
         String move = scan.next();
         while(p.getScore() < 21 && !move.equals("stay")){
-            while (!move.equals("hit") || !move.equals("stay")){
+            while (!move.equals("hit") && !move.equals("stay")){
                 System.out.println("must input either hit or stay");
                 move = scan.next();
             }
