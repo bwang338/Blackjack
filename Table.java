@@ -1,19 +1,45 @@
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.lang.Thread;
 
-public class Table {
+public class Table implements Runnable{
     Player p1;
     Player dealer;
     ArrayList<Card> deck = new ArrayList<>();
     String[] suits = new String[]{"Spades", "Diamonds", "Hearts", "Clubs"};
     Random rand = new Random();
-    
+    private Thread thr;
+
+    public void run() {
+		try{
+			while (true) {
+				if (p1.getScore() > 21 && p1.holdAce()){
+                    for (int i = 0; i < p1.getCards().size(); i++){
+                        if (p1.getCards().get(i).getNum() == 11){
+                            p1.getCards().get(i).setNum(1);
+                        }
+                    }
+                }
+
+                if (dealer.getScore() > 21 && dealer.holdAce()){
+                    for (int i = 0; i < dealer.getCards().size(); i++){
+                        if (dealer.getCards().get(i).getNum() == 11){
+                            dealer.getCards().get(i).setNum(1);
+                        }
+                    }
+                }
+			}	
+		}catch(Exception e) {
+		}
+	}
     
     public Table(String p1){
         this.p1 = new Player(p1);
         this.dealer = new Player("Dealer");
         initDeck();
+        thr = new Thread(this);
+        thr.start();
     }
 
     //helper method
