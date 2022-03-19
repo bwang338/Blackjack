@@ -43,6 +43,7 @@ public class Table {
         drawCard(p1);
         p1.displayCards();
         dealer.displayCards();
+        drawCard(dealer);
     }
 
     public void play(Player p){
@@ -64,6 +65,12 @@ public class Table {
         scan.close();
     }
 
+    private void dealerPlay(){
+        while(dealer.getScore() < 17){
+            drawCard(dealer);
+        }
+    }
+
     public void checkWin(Player p1, Player p2){
         if (p1.getScore() > p2.getScore()){
             System.out.println(p1 + "wins!");
@@ -79,7 +86,7 @@ public class Table {
         Table table = new Table(name);
         table.startGame();
         table.play(table.p1);
-        table.play(table.dealer);
+        table.dealerPlay();
         table.checkWin(table.p1, table.dealer);
         scan.close();
     }    
