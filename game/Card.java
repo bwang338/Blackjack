@@ -42,15 +42,17 @@ public class Card {
     }
 
 
+
+
+    public void setNum(int num){
+        this.number = num;
+    }
+
     /**
      * Returns the suit of the card
      *
      * @return suit of the card
      */
-
-    public void setNum(int num){
-        this.number = num;
-    }
     public String getSuit(){
         return this.suit;
     }

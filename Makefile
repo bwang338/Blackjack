@@ -22,7 +22,7 @@ default: all
 all:
 	# Compile classes
 	@javac -g -cp $(CLASSPATH) -d ./classes $(sourcelist)
-	#Compile Javadocs
+	# Compile Javadocs
 	@javadoc -d $(docdir) -linksource $(sourcelist)
 
 # To start over from scratch, type 'make clean'.  
