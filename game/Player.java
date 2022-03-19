@@ -29,6 +29,20 @@ public class Player {
         cards = new ArrayList<>();
     }
 
+
+    public boolean holdAce(){
+        for (int i = 0; i < cards.size(); i++){
+            if (cards.get(i).getNum() == 11){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<Card> getCards(){
+        return cards;
+    }
+
     /**
      * Returns the value of the player's name
      *
