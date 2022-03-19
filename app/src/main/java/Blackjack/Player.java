@@ -12,11 +12,11 @@ import java.util.ArrayList;
  */
 public class Player {
 
-    String name;
+    private String name;
 
-    int score;
+    private int score;
 
-    ArrayList<Card> cards;
+    private ArrayList<Card> cards;
 
     /**
      * Returns the player's name
