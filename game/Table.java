@@ -1,3 +1,5 @@
+package game;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -37,9 +39,8 @@ public class Table {
         dealer.displayCards();
     }
 
-    public void play(Player p){
+    public void play(Player p, Scanner scan){
         System.out.println("what would " + p.getName() + " like to do? (hit/stay)");
-        Scanner scan = new Scanner(System.in);
         String move = scan.next();
         while(p.getScore() < 21 && !move.equals("stay")){
             while (!move.equals("hit") && !move.equals("stay")){
@@ -52,8 +53,6 @@ public class Table {
             drawCard(p);
             p.displayCards();
         }
-
-        scan.close();
     }
 
     public void checkWin(Player p1, Player p2){
@@ -70,8 +69,8 @@ public class Table {
         String name = scan.nextLine();
         Table table = new Table(name);
         table.startGame();
-        table.play(table.p1);
-        table.play(table.dealer);
+        table.play(table.p1, scan);
+        table.play(table.dealer, scan);
         table.checkWin(table.p1, table.dealer);
         scan.close();
     }    

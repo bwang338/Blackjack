@@ -1,36 +1,37 @@
-#
 # A simple makefile for compiling three java classes
-#
 
 # define a makefile variable for the java compiler
-#
+
 JCC = javac
 
-# define a makefile variable for compilation flags
-# the -g flag compiles with debugging information
-#
-JFLAGS = -g
+rootdir = .
 
-# typing 'make' will invoke the first target entry in the makefile 
-# (the default one in this case)
-#
-default: Table.class Card.class Player.class
+CLASSPATH = $(rootdir)/src:$(rootdir)/tests
 
-# this target entry builds the Table class
-# the Table.class file is dependent on the Table.java file
-# and the rule associated with this entry gives the command to create it
-#
-Table.class: Table.java
-        $(JCC) $(JFLAGS) Table.java
+sourcelist = $(shell find $(rootdir) -name '*.java' | sed "s,[.]/,,g")
 
-Card.class: Card.java
-        $(JCC) $(JFLAGS) Card.java
+docdir = ./docs
 
-Player.class: Player.java
-        $(JCC) $(JFLAGS) Player.java
+classdir = ./classes
+
+
+CLASSES = Table.java Card.java Player.java
+
+default: all
+
+all:
+	# Compile classes
+	@javac -g -cp $(CLASSPATH) -d ./classes $(sourcelist)
+	#Compile Javadocs
+	@javadoc -d $(docdir) -linksource $(sourcelist)
 
 # To start over from scratch, type 'make clean'.  
 # Removes all .class files, so that the next make rebuilds them
-#
-clean: 
-        $(RM) *.class
+clean:
+	# Remove all of the documentation
+	@if [ -d $(docdir) ]; then rm -r $(docdir); fi;
+	# Remove all the class files in the classpath
+	@-find $(rootdir) \( -name "*~" -o -name "*.class" -o -name "runTests" \) -exec rm '{}' \;
+	# Remove Classes directory
+	@if [ -d $(classdir) ]; then rm -r $(classdir)/*; fi;
+

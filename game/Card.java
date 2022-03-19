@@ -1,3 +1,12 @@
+package game;
+
+/**
+ * This class represents the cards used at the table.
+ *
+ * @author Brian Wang and Jonathan Leibovich
+ * @version 1.0
+ * @since 2022-03-18
+ */
 public class Card {
     boolean faceCard = false;
     int number;
@@ -5,10 +14,14 @@ public class Card {
     String royal;
     String[] royalFaces = new String[]{"Jack", "Queen", "King"};
 
+    /**
+     * @param number value of the card
+     * @param suit suit of the card
+     */
     public Card(int number, String suit){
         this.number = number;
         this.suit = suit;
-        this.royal = "";
+        this.royal = null;
         if (number > 10){
             this.number = 10;
             faceCard = true;
@@ -19,22 +32,47 @@ public class Card {
         }
     }
 
+    /**
+     * Returns the value of the card
+     *
+     * @return value of the card
+     */
     public int getNum(){
         return this.number;
     }
 
+    /**
+     * Returns the suit of the card
+     *
+     * @return suit of the card
+     */
     public String getSuit(){
         return this.suit;
     }
 
+    /**
+     * If the card is a face card, it will return the face
+     *
+     * @return King, Queen, or Jack based on the card
+     */
     public String getFace(){
         return this.royal;
     }
 
+    /**
+     * Returns whether this card is a face card
+     *
+     * @return If this card is a face card
+     */
     public boolean isFace(){
         return this.faceCard;
     }
 
+    /**
+     * Returns all the information about a given card
+     *
+     * @return representation of the card as a string
+     */
     @Override
     public String toString() {
         if (faceCard == true){
