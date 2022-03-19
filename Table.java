@@ -13,12 +13,7 @@ public class Table {
     public Table(String p1){
         this.p1 = new Player(p1);
         this.dealer = new Player("Dealer");
-
-        for (int j = 0; j < 4; j++){
-            for (int i = 1; i <= 13; i++){
-                    deck.add(new Card(i, suits[j]));
-            }
-        }
+        initDeck();
     }
 
     //helper method
@@ -27,6 +22,19 @@ public class Table {
         Card card = deck.get(cardIndex);
         p.addCard(card);
         deck.remove(cardIndex);
+        if (deck.size() < 15){
+            initDeck();
+        }
+    }
+    
+    private void initDeck(){
+        for (int s = 0; s < 4; s++){
+            for (int j = 0; j < 4; j++){
+                for (int i = 1; i <= 13; i++){
+                        deck.add(new Card(i, suits[j]));
+                }
+            }
+        }
     }
 
     public void startGame(){
