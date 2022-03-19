@@ -23,6 +23,10 @@ public class Card {
         return this.number;
     }
 
+    public void setNum(int num){
+        this.number = num;
+    }
+
     public String getSuit(){
         return this.suit;
     }
