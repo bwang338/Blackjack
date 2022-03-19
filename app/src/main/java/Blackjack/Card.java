@@ -1,4 +1,4 @@
-package game;
+package Blackjack;
 
 /**
  * This class represents the cards used at the table.
