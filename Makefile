@@ -28,7 +28,9 @@ CLASSES = Table.java Card.java Player.java
 default: all
 
 all:
+	# Compile classes
 	@javac -cp $(CLASSPATH) -d ./classes $(sourcelist)
+	#Compile Javadocs
 	@javadoc -d $(docdir) -linksource $(sourcelist)
 
 # To start over from scratch, type 'make clean'.  
