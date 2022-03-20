@@ -9,6 +9,7 @@ package Blackjack;
  */
 public class Card {
     boolean faceCard = false;
+    boolean ace = false;
     int number;
     String suit; 
     String royal;
@@ -29,6 +30,7 @@ public class Card {
         }
         if (number == 1){
             this.number = 11;
+            this.ace = true;
         }
     }
 
@@ -42,8 +44,11 @@ public class Card {
     }
 
 
-
-
+    /**
+     * Specifically used with the Ace card to change value from 11 to 1
+     *
+     * @param num New number to be set to
+     */
     public void setNum(int num){
         this.number = num;
     }
@@ -82,8 +87,10 @@ public class Card {
      */
     @Override
     public String toString() {
-        if (faceCard == true){
+        if (faceCard){
             return this.royal + " of " + this.suit; 
+        } else if (ace){
+            return "Ace of " + this.suit;
         }
         return this.number + " of " + this.suit;
     }

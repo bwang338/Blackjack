@@ -1,24 +1,25 @@
 package Blackjack;
 
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
-public class PlayerTest {
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-    private final PrintStream originalErr = System.err;
+import static org.junit.jupiter.api.Assertions.*;
 
-    private Player p1;
-    private Player p2;
+public class PlayerTest {
+    private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private static final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+    private static final PrintStream originalOut = System.out;
+    private static final PrintStream originalErr = System.err;
+
+    private Player p1 = new Player("Brian");
+    private Player p2 = new Player("Max");
 
     Card ace = new Card(1,"Spade");
     Card king = new Card(5,"Spade");
@@ -28,16 +29,14 @@ public class PlayerTest {
     Card jack = new Card(11,"Spade");
 
 
-    @BeforeClass
+    @BeforeAll
     private static void setup() {
-        p1 = new Player("Brian");
-        p2 = new Player("Max");
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
 
-    @AfterClass
-    public void restoreStreams() {
+    @AfterAll
+    public static void restoreStreams() {
         System.setOut(originalOut);
         System.setErr(originalErr);
     }
@@ -131,7 +130,7 @@ public class PlayerTest {
         p1.addCard(ace);
         p1.addCard(three);
         p1.displayCards();
-        assertEquals("Brian has:\n" + ace.toString() + three.toString() +
+        assertEquals("Brian has:\n\n" + ace.toString() + '\n' + three.toString() +'\n' +
                 "Brian's score is 14\n", outContent.toString());
     }
 }

@@ -86,6 +86,6 @@ public class Player {
         for (int i = 0; i < this.cards.size(); i++){
             System.out.println(this.cards.get(i));
         }
-        System.out.println(name + "'s score is " + this.score + "\n");
+        System.out.println(name + "'s score is " + this.score);
     }
 }
