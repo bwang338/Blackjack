@@ -1,6 +1,7 @@
 package Blackjack;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 import java.lang.Thread;
@@ -75,32 +76,52 @@ public class Table implements Runnable{
     }
 
     public void play(Player p, Scanner scan){
-        System.out.println("what would " + p.getName() + " like to do? (hit/stay)");
-        String move = scan.next();
-        while(p.getScore() < 21 && !move.equals("stay")){
-            while (!move.equals("hit") && !move.equals("stay")){
-                System.out.println("must input either hit or stay");
+        String move = "";
+        while (!Objects.equals(move, "stay")){
+            System.out.println("what would " + p.getName() + " like to do? (hit/stay)");
+            move = scan.next();
+            while (!Objects.equals(move, "stay") && !Objects.equals(move, "hit")){
+                System.out.println("Options are only to hit or stay. What would you like to do?");
                 move = scan.next();
             }
-            if (move.equals("stay")){
+            if (move.equals("hit")){
+                drawCard(p);
+                p.displayCards();
+            }
+            if (bust(p)){
                 break;
             }
-            drawCard(p);
-            p.displayCards();
         }
+
+
+    }
+
+    public boolean bust(Player p){
+        if (p.getScore() > 21){
+            p.bust = true;
+            return true;
+        }
+        return false;
     }
 
     private void dealerPlay(){
         while(dealer.getScore() < 17){
             drawCard(dealer);
+            dealer.displayCards();
+            bust(dealer);
         }
     }
 
+    public void clearCards(Player p1, Player p2){
+        p1.noCards();
+        p2.noCards();
+    }
+
     public void checkWin(Player p1, Player p2){
-        if (p1.getScore() > p2.getScore()){
-            System.out.println(p1 + "wins!");
+        if (p1.bust || (p2.getScore() > p1.getScore() && !p2.bust)){
+            System.out.println(p2 +  " wins!\n");
         }
-        else System.out.println(p2 + "wins!");
+        else System.out.println(p1 + " wins!\n");
     }
 
     //used to test
@@ -109,11 +130,14 @@ public class Table implements Runnable{
         System.out.println("Input player name:");
         String name = scan.nextLine();
         Table table = new Table(name);
-        table.startGame();
-        table.play(table.p1, scan);
-        table.dealerPlay();
-
-        table.checkWin(table.p1, table.dealer);
-        scan.close();
+        while (true){
+            table.p1.bust = false;
+            table.startGame();
+            table.play(table.p1, scan);
+            table.dealerPlay();
+            table.checkWin(table.p1, table.dealer);
+            table.clearCards(table.p1, table.dealer);
+        }
+//        scan.close();
     }    
 }
