@@ -12,6 +12,8 @@ import java.util.ArrayList;
  */
 public class Player {
 
+    public boolean bust;
+
     private String name;
 
     private int score;
@@ -76,16 +78,22 @@ public class Player {
      */
     public void noCards(){
         cards.clear();
+        this.score = 0;
     }
 
     /**
      * Display the cards in your hands as well as the cards combined value
      */
     public void displayCards(){
-        System.out.println(name + " has:\n");
+        System.out.println(name + " has:");
         for (int i = 0; i < this.cards.size(); i++){
             System.out.println(this.cards.get(i));
         }
-        System.out.println(name + "'s score is " + this.score);
+        System.out.println(name + "'s score is " + this.score + '\n');
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
