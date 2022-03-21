@@ -6,6 +6,59 @@ import java.util.Random;
 import java.util.Scanner;
 import java.lang.Thread;
 
+/**
+ * Here's how I think this file should function
+ * main:
+ *      Get number of players
+ *      for loop:
+ *          Get players name
+ *          add to arraylist
+ *      Start Table
+ *      initDeck()
+ *      Table.addDealer()
+ *      call Play():
+ * Play:
+ *      While numPlayers > 1:
+ *          try:
+ *              int array bets = getBets() //Throw error if no more players
+ *          catch e:
+ *              gameSummary()
+ *              quit game
+ *          drawDealerCards()
+ *          if (Insurance()):
+ *              OfferPlayersInsurance()
+ *          Display all cards()
+ *          hitOrStay()
+ *          CheckWinners()
+ *          clearCards()
+ * getBets:
+ *      for p in players:
+ *          Ask for bet amount or quit
+ *          if quit:
+ *              remove player from Players, throw error if no more players? or we can do if anyone quits game ends
+ *          draw initial set of cards (by calling different function)
+ * DisplayCards:
+ *      for p in players:
+ *         p.DisplayCards
+ * hitOrStay:
+ *      for p in players:
+ *         While move != stay:
+ *              what do you want to do?
+ *              if not hit or stay ask again
+ *              if hit, add card and display new cards
+ *              check bust()
+ * CheckWinners:
+ *      for p in players
+ *          if p.bust or (p.score < dealer.score and !dealer.bust):
+ *              p lost x money, new balance is
+ *          else
+ *              p won x money, new balance is
+ * clearCards:
+ *      for p in players:
+ *          Remove cards, should make everyones score 0
+ *      dealer.clearcard
+ */
+
 public class Table implements Runnable{
     Player p1;
     Player dealer;
