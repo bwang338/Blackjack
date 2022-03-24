@@ -20,6 +20,7 @@ public class Table implements Runnable{
                     for (int i = 0; i < p1.getCards().size(); i++){
                         if (p1.getCards().get(i).getNum() == 11){
                             p1.getCards().get(i).setNum(1);
+                            break;
                         }
                     }
                 }
@@ -28,6 +29,7 @@ public class Table implements Runnable{
                     for (int i = 0; i < dealer.getCards().size(); i++){
                         if (dealer.getCards().get(i).getNum() == 11){
                             dealer.getCards().get(i).setNum(1);
+                            break;
                         }
                     }
                 }
