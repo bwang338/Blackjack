@@ -95,7 +95,7 @@ public class Table implements Runnable{
 
         scan.close();
     }
-
+    
     private void dealerPlay(){
         while(dealer.getScore() < 17){
             drawCard(dealer);
