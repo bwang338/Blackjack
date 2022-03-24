@@ -31,6 +31,7 @@ public class Table implements Runnable{
                 }
 			}	
 		}catch(Exception e) {
+            System.out.println("Something went wrong with the thread");
 		}
 	}
     
@@ -99,9 +100,9 @@ public class Table implements Runnable{
 
     public void checkWin(Player p1, Player p2){
         if (p1.getScore() > p2.getScore()){
-            System.out.println(p1 + "wins!");
+            System.out.println(p1 + " wins!");
         }
-        else System.out.println(p2 + "wins!");
+        else System.out.println(p2 + " wins!");
     }
 
     //used to test

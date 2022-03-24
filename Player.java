@@ -48,4 +48,8 @@ public class Player {
         }
         System.out.println(name + "'s score is " + this.score + "\n");
     }
+    @Override
+    public String toString(){
+        return this.name;
+    }
 }
