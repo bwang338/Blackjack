@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.lang.Thread;
 
 public class Table implements Runnable{
@@ -10,10 +11,11 @@ public class Table implements Runnable{
     String[] suits = new String[]{"Spades", "Diamonds", "Hearts", "Clubs"};
     Random rand = new Random();
     private Thread thr;
+    private final AtomicBoolean running = new AtomicBoolean(true);
 
     public void run() {
 		try{
-			while (true) {
+			while (running.get()) {
 				if (p1.getScore() > 21 && p1.holdAce()){
                     for (int i = 0; i < p1.getCards().size(); i++){
                         if (p1.getCards().get(i).getNum() == 11){
@@ -50,6 +52,8 @@ public class Table implements Runnable{
         p.addCard(card);
         deck.remove(cardIndex);
         if (deck.size() < 15){
+            System.out.println("Reshuffling Deck");
+            deck.clear();
             initDeck();
         }
     }
@@ -105,6 +109,10 @@ public class Table implements Runnable{
         else System.out.println(p2 + " wins!");
     }
 
+    public void stop(){
+        running.set(false);
+    }
+
     //used to test
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
@@ -116,5 +124,6 @@ public class Table implements Runnable{
         table.dealerPlay();
         table.checkWin(table.p1, table.dealer);
         scan.close();
+        table.stop();
     }    
 }

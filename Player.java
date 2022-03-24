@@ -2,12 +2,10 @@ import java.util.ArrayList;
 
 public class Player {
     String name;
-    int score;
     ArrayList<Card> cards;
     
     public Player(String name){
         this.name = name;
-        this.score = 0;
         cards = new ArrayList<>();
     }
 
@@ -25,7 +23,11 @@ public class Player {
     }
 
     public int getScore(){
-        return this.score;
+        int total = 0;
+        for (int i = 0; i < cards.size(); i++){
+            total += cards.get(i).getNum();
+        }
+        return total;
     }
 
     public String getName(){
@@ -34,7 +36,6 @@ public class Player {
 
     public void addCard(Card card){
         cards.add(card);
-        this.score += card.getNum();
     }
 
     public void noCards(){
@@ -46,7 +47,7 @@ public class Player {
         for (int i = 0; i < this.cards.size(); i++){
             System.out.println(this.cards.get(i));
         }
-        System.out.println(name + "'s score is " + this.score + "\n");
+        System.out.println(name + "'s score is " + this.getScore() + "\n");
     }
     @Override
     public String toString(){

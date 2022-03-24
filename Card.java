@@ -16,6 +16,7 @@ public class Card {
         }
         if (number == 1){
             this.number = 11;
+            this.royal = "Ace";
         }
     }
 
