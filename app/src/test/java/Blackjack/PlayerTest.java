@@ -130,7 +130,7 @@ public class PlayerTest {
         p1.addCard(ace);
         p1.addCard(three);
         p1.displayCards();
-        assertEquals("Brian has:\n\n" + ace.toString() + '\n' + three.toString() +'\n' +
-                "Brian's score is 14\n", outContent.toString());
+        assertEquals("Brian has:\n" + ace.toString() + '\n' + three.toString() +'\n' +
+                "Brian's score is 14\n\n", outContent.toString());
     }
 }

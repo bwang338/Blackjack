@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 import java.lang.Thread;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Here's how I think this file should function
@@ -66,14 +67,16 @@ public class Table implements Runnable{
     String[] suits = new String[]{"Spades", "Diamonds", "Hearts", "Clubs"};
     Random rand = new Random();
     private Thread thr;
+    private final AtomicBoolean running = new AtomicBoolean(true);
 
     public void run() {
 		try{
-			while (true) {
+			while (running.get()) {
 				if (p1.getScore() > 21 && p1.holdAce()){
                     for (int i = 0; i < p1.getCards().size(); i++){
                         if (p1.getCards().get(i).getNum() == 11){
                             p1.getCards().get(i).setNum(1);
+                            break;
                         }
                     }
                 }
@@ -82,11 +85,13 @@ public class Table implements Runnable{
                     for (int i = 0; i < dealer.getCards().size(); i++){
                         if (dealer.getCards().get(i).getNum() == 11){
                             dealer.getCards().get(i).setNum(1);
+                            break;
                         }
                     }
                 }
 			}	
 		}catch(Exception e) {
+            System.out.println("Something went wrong with the thread");
 		}
 	}
     
@@ -105,10 +110,16 @@ public class Table implements Runnable{
         p.addCard(card);
         deck.remove(cardIndex);
         if (deck.size() < 15){
+            System.out.println("Reshuffling Deck");
+            deck.clear();
             initDeck();
         }
     }
-    
+
+    public void stop(){
+        running.set(false);
+    }
+
     private void initDeck(){
         for (int s = 0; s < 4; s++){
             for (int j = 0; j < 4; j++){
@@ -191,6 +202,7 @@ public class Table implements Runnable{
             table.checkWin(table.p1, table.dealer);
             table.clearCards(table.p1, table.dealer);
         }
+//        table.stop();
 //        scan.close();
     }    
 }
